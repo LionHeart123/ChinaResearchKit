@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>ResearchKit</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="feed://researchkit.github.io/news.rss">
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<link rel="icon" href="images/favicon.ico" />
+	<link rel="apple-touch-icon" href="images/favicon.ico">
+
+	<link rel="stylesheet" href="styles/researchkit.css" type="text/css" />
+
+</head>
+<body>
+	<header class="header-container">
+		<div class="header">
+			<span class="hero-icon"></span>
+			<h1 class="title">ResearchKit</h1>
+		</div>
+	</header>
+
+	<main id="content" class="content">
+
+		<nav class="layout-tabs">
+			<section class="tab-wrapper">
+				<span class="divider"></span>
+				<ul class="grid3col tabs">
+					<li class="column one active"><a href="">概述</a></li>
+					<li class="column two"><a href="blog.html">博客</a></li>
+				</ul>
+			</section>
+		</nav>
+
+		<section class="title-intro padding-top-40 padding-bottom-40">
+			<h1>ResearchKit 介绍</h1>
+			<p class="intro">ResearchKit 是一个由 Apple 推出的开源框架，它可以让研究人员和开发人员创建用于医疗研究的强大应用。您可以轻松地使用各种各样的可定制模块，您还可以在这些模块的基础上创建可视化授权工作流、实时的动态活动任务，以及调查报告，然后将它们与社区一同分享。由于 ResearchKit 能够与 HealthKit 无缝衔接，因此研究人员可以在他们的研究中获取更多有关的数据——例如日常步数、消耗的卡路里，以及心率等信息。</p>
+		</section>
+
+		<section class="layout-2b grid2col divider-top padding-top-40 padding-bottom-20 divider-bottom">
+
+			<section class="column first">
+				<h2>框架</h2>
+				<p>核心的 ResearchKit 框架提供的核心模块包括了调查引擎、可视化授权工作流，以及活动任务。</p>
+
+				<p>核心框架中自带有 Swift 和 Objective-C 的示例、完整概念以及 API 文档。它同样已经翻译为了多种语言。</p>
+                
+                <h2>链接</h2>
+				<ul class="links">
+					<li class="download"><a href="https://github.com/researchkit/researchkit">从 GitHub 上获取</a></li>
+					<li class="document"><a href="docs/docs/Overview/GuideOverview.html">文档</a></li>
+					<li class="reference"><a href="docs/index.html">API 参考</a></li>
+                    <li class="reference"><a href="hig/index.html">调查类应用设计指南</a></li>
+                    <li class="forum-topic"><a href="https://forums.developer.apple.com/community/researchkit">ResearchKit 讨论组</a></li>
+					<li class="sample-code"><a href="https://github.com/ResearchKit/ResearchKit/tree/master/samples/ORKCatalog">示例代码</a></li>
+					<li class="video"><a href="https://www.apple.com/researchkit/">观看视频</a></li>
+				</ul>
+
+				<h3>使用 ResearchKit</h3>
+				<p>ResearchKit 中的任务包含了一系列展示给用户的步骤。所有东西，无论是可视化授权工作流、调查报告，还是活动任务，都可以表示为一项『任务』，这个任务可以在任务视图控制器当中呈现。</p>
+				<ul class="circle">
+					<li>在 iOS 设备上构建使用模态展示的调查</li>
+					<li>使用自定义的可视化授权示例来解释您研究项目的细节，并获得参与者的签名。请确保您的可视化授权工作流得到了您的机构审查委员会 (IRB) 或者伦理委员会的批准。</li>
+					<li>使用活动任务来邀请用户在指导性条件下执行相应的活动，并使用 iPhone 的传感器来收集相关数据。</li>
+				</ul>
+
+                                <h3>后台服务</h3>
+                                <p>ResearchKit 框架不包含任何数据管理方案。本框架可以与您所选择的数据管理方案共同使用。当您在为您的研究应用选择后台服务的时候，请考虑到供应商的数据隐私协议以及安全实践。欲了解更多信息，请参见 <a href="https://github.com/ResearchKit/ResearchKit/wiki/best-practices">ResearchKit 框架最佳实践</a>。</p>
+
+<!--				<p class="padding-top-10"><b>Read-Eval-Print-Loop (REPL)</b>. The debugging console in Xcode includes an interactive version of the Swift language built right in. Use Swift syntax to evaluate and interact with your running app, or write new code to see how it works in a script-like environment. Available from within the Xcode console, or in Terminal.</p>-->
+			</section>
+
+			<section class="column last">
+				<h2>ResearchKit 教程</h2>
+				<p>这些教程与 ResearchKit 文档一起，将帮助您快速构建并运行 ResearchKit 应用。请注意，这些教程是由 ResearchKit 社区的成员撰写的，Apple 并不完全认可所陈述内容的准确性，也不对承担相应的责任。</p>
+
+				<ul class="links">
+					<li class="document"><a href="http://blog.shazino.com/articles/dev/researchkit-setup-project/">如何搭建一个 ResearchKit 项目</a></li>
+					<li class="document"><a href="http://blog.shazino.com/articles/dev/researchkit-advanced-setup/">高级 ResearchKit 项目配置</a></li>
+					<li class="document"><a href="http://www.raywenderlich.com/learning-researchkit">学习 ResearchKit</a></li>
+					<li class="document"><a href="http://www.raywenderlich.com/117433/accessing-heart-rate-data-researchkit-study">为您的 ResearchKit 调查访问心率数据</a></li>
+					<li class="document"><a href="http://blog.shazino.com/articles/dev/researchkit-new-active-task/">如何创建一个新的 ResearchKit 活动任务</a></li>
+				</ul>
+
+
+
+				<h2>ResearchKit 示例代码</h2>
+
+				<p>ResearchKit 框架自带有两个位于 samples 文件夹中的示例应用：ORKSample 和 ORKCatalog。</p>
+
+				<p>ORKSample 应用演示了如何使用 ResearchKit 的主要特性——授权通知、调查报告、活动任务、创建账户，以及密码 PIN 码输入。此外还演示了如何构建一个好的研究应用，以确保其能提供良好的用户体验。您可以通过修改示例应用来为您的研究思路建立快速原型。</p>
+
+				<p>ORKSample 拥有：</p>
+				<ul class="circle">
+					<li>提供研究报告预览的占位页面</li>
+					<li>展示参与者结果的管理页面</li>
+					<li>显示用户关键数据，并提供一个易于访问的链接来让用户退出研究的配置页面</li>
+					<li>包含一个展示所有研究任务列表的活动页面</li>
+				</ul>
+
+
+				<p>ORKCatalog 展示了如何：</p>
+				<ul class="circle">
+					<li>构造一个任务</li>
+					<li>展示任务视图控制器</li>
+					<li>在任务视图控制器中处理委托回调</li>
+					<li>访问由任务所收集结果的结构</li>
+				</ul>		
+			
+			</section>
+
+		</section>
+
+		<section class="padding-top-30">
+			<p>ResearchKit 以及 ResearchKit 图标皆为 Apple Inc. 的商标。</p>
+
+			<h4 class="padding-top-10">商标信息</h4>
+			<p class="half-size">Apple, the Apple logo and other Apple trademarks, service marks, graphics, and logos used in connection with the ResearchKit project are trademarks or registered trademarks of Apple Inc. in the US and/or other countries. Other trademarks, service marks, graphics, and logos used in connection with the ResearchKit project may be the trademarks of their respective owners. You are granted no right or license in any of the aforesaid trademarks, and further agree that you shall not remove, obscure, or alter any proprietary notices (including trademark and copyright notices) that may be affixed to or contained within the Service.
+You may use the ResearchKit mark in order to indicate that your product uses or is compatible with the ResearchKit software (for example, “for use with,” “for,” or “compatible with" ResearchKit) provided that:</p>
+			<ol>
+			<li class="half-size">The product does in fact use ResearchKit software developed by the ResearchKit.org open source project;</li>
+			<li class="half-size">The ResearchKit mark stands apart from your brand or trademark (e.g., as in “ResearchKit for Chromium")</li>
+			<li class="half-size">You do not seek to register a trademark containing ResearchKit or the ResearchKit logo; and </li>
+			<li class="half-size">You do not state or imply in any way that Apple endorses, sponsors or guarantees your product, or was involved in or associated with its development.</li>
+			</ol>
+
+			<p class="half-size">For further information about proper referential uses of the mark ResearchKit and the ResearchKit logo, please review the <a href="https://www.apple.com/legal/intellectual-property/guidelinesfor3rdparties.html">“Guidelines for Using Apple Trademarks and Copyrights”</a>. </p>
+		</section>
+
+	</main>
+
+</body>
+</html>
+

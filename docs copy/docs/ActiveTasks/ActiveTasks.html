@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>活动任务 - 说明文档</title>
+
+	<link rel="stylesheet" href="../../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="https://github.com/ResearchKit/ResearchKit">ResearchKit </a>
+			</h1>
+
+			<!--<p id="developer-home">
+				<a href="../../index.html">ResearchKit</a>
+			</p>-->
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+				        <li>编程指南：</li>
+					<li><a href="../../docs/Overview/GuideOverview.html">概述</a></li>
+				        <li><a href="../../docs/Survey/CreatingSurveys.html">调查</a></li>
+					<li><a href="../../docs/InformedConsent/InformedConsent.html">获取授权</a></li>
+					<li><a href="../../docs/ActiveTasks/ActiveTasks.html">活动任务</a></li>
+					<li><a href="../../docs/Charts/ChartsAndGraph.html">图表</a></li>
+				        <li>API 参考：</li>
+					<li><a href="../../index.html">首页</a></li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview-contents" class="container">
+			<div id="content">
+				<main role="main">
+					<!--<h1 class="title">ActiveTasks Document</h1>-->
+
+					<h1></h1>
+
+<p><sub>这些材料仅供参考，这些建议并不能保证完全符合法律法规。您应当联系一名律师，以获取关于开发研究类应用的相关建议，以及其他适用的法律法规。</sub></p>
+
+<h1>活动任务</h1>
+
+<p>活动任务让使用者可以在受限的情况下来实施行动，此时iPhone的传感器被用来收集数据。举个例子，一个用来分析步态和平衡的活动任务也许会要求他们的使用者走上几步，同时iPhone的加速度感应器就会收集相应的样本数据。</p>
+
+
+
+
+
+<h2>预定义的活动任务</h2>
+<p>现在发布的版本中，ResearchKit™框架包括五个预定义任务，而这五个任务可以归结成四大类：活动，健康，认知和声音。下面的表中总结了每一个任务同时表明了他们所收集到的数据。</p>
+
+
+<table>
+<caption>ResearchKit中的活动任务</caption>
+<thead>
+    <tr>
+        <td>分类</td>
+        <td>任务</td>
+        <td>传感器</td>
+        <td>收集到的数据</td>
+    </tr>
+</thead>
+<tbody>
+ <tr><td rowspan = 2>活动</td> 
+     <td>步态和平衡</td>
+     <td>加速计<br>
+  陀螺仪</td> 
+  <td>设备移动<br>计步器</td> 
+ </tr>
+<tr><td>轻拍速度</td> 
+<td>多点触控显示 <br>
+加速计 (可选)
+</td> 
+  <td>触控活动<br/>
+  </td> 
+</tr>
+<tr><td rowspan = 2>健康</td>
+ <td>适应度</td>
+ <td>GPS<br>陀螺仪</td>
+<td>设备移动<br>计步器<br>位置<br>心率
+   </td> 
+</tr>
+<tr><td>计时步行</td>
+  <td>GPS<br>陀螺仪</td>
+<td>设备移动<br>计步器<br>位置
+   </td> 
+</tr>
+<tr><td rowspan = 4>认知</td>
+<td>空间记忆</td>
+<td>多点触控显示 <br>
+加速计 (可选)</td>
+<td>
+触摸活动<br>正确答案<br> 实际队列
+</td>
+</tr>
+<tr><td>同步系列加法测验 (PSAT)</td> 
+<td>多点触控显示
+</td> 
+  <td>从使用者来的额外数据
+  </td> 
+</tr>
+<tr><td>汉诺塔</td> 
+<td>多点触控显示 
+</td> 
+  <td>使用者的每一次移动
+  </td> 
+</tr>
+<tr><td>反应时间</td> 
+<td>加速计<br>陀螺仪
+</td> 
+  <td>设备移动
+  </td> 
+
+</tr>
+<tr><td>声音</td>
+<td>持续出声</td>
+    <td>麦克风</td>
+    <td>未压缩的音频</td>
+</tr>
+<tr><td>音频</td>
+ <td>测音</td>
+ <td><?></td>
+<td>用户所能识别的最小声音<br>
+   </td> 
+</tr>
+</tbody>
+</table>
+
+
+<h4>预定义任务的可选项</h4>
+
+
+<p>你可以在实例化预定义活动任务之一的时候禁用指定或者是自动包含在框架中的完成步骤，通过结合 <a href="../../Constants/ORKPredefinedTaskOption.html"><code>ORKPredefinedTaskOption</code></a> 常量。</p>
+
+<p>其他的选项标志可以被用来排除在你的研究中不需要的，特定类型的数据收集。比如，你需要用户实施健康任务不过不需要使用心率数据，这时我们就可以使用 <code>ORKPredefinedTaskOptionExcludeHeartrate</code>。</p>
+
+
+<h4>健康</h4>
+
+<p>在健康任务中 (参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:">ORKOrderedTask fitnessCheckTaskWithIdentifier:intend
+edUseDescription:walkDuration:restDuration:options</a>), 使用者走了特定的一段时间 (一般来说是几分钟). 传感器数据通过任务视图控制器的委托被收集和返回。 传感器数据一般包括加速计数据，设备移动数据，计步器数据，位置数据，如果有的话，还有心率数据。</p>
+
+
+<p>在一次走路活动的末期，如果心跳数据还是可以被有效收集的，使用者被要求坐下来休息一段时间，数据收集会在这段休息期间继续进行。</p>
+
+
+<p>下面的这些屏幕截图说明了健康任务可能的样子</p>
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="FitnessImages/TaskIntroduction.png" style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p>
+
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="FitnessImages/FitnessTaskIntroduction.png" style="width: 100%;border: solid black 1px;">描述使用者必须做的事情的引导</p>
+
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="FitnessImages/FitnessCountDownStep.png" style="width: 100%;border: solid black 1px;">任务开始之前特定时长的倒计时</p>
+
+
+<p><p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="FitnessImages/FitnessTaskWalkStep.png" style="width: 100%;border: solid black 1px; ">显示距离和心率</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="FitnessImages/FitnessTaskRestStep.png" style="width: 100%;border: solid black 1px;">休息阶段，本阶段如无心率数据可以直接跳过</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="FitnessImages/FitnessTaskCompletionStep.png" style="width: 100%;border: solid black 1px;">确认完成</p>
+<p style="clear: both;"></p>
+
+<p>所有数据都由 iOS 公开的 CoreMotion 和 HealthKit API 收集，同时序列化成 JSON 格式。没有分析适用于 Researchkit 框架相关的数据。</p>
+
+<h4>音频</h4>
+
+<p>在一段音频中(参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:options:">ORKOrderedTask audio
+TaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:options</a>), 使用者制造了一段可以被识别的声音, 之后一段音频就可以被记录下来了. 对音频数据的分析与处理并不在 ResearchKit 框架之中, 不过，本框架可能自然而然的涉及幂频谱，我们要明白它是如何与制造产生声音的能力联系起来。 ResearchKit 框架使用 <code>AVFoundation</code> 框架来收集数据以及产生录音过程中的相关指示。 没有任何数据分析与处理是由 ResearchKit 完成的; 你可以按照你的需求在任务中来定义你对音频的处理。</p>
+
+<p>下面的截屏表示是一个音频任务的例子</p>
+
+<p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="AudioImages/AboutTaskIntroduction.png" alt="Welcome Screen"  style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="AudioImages/AudioTaskIntroduction.png" alt="Instruction Screen" style="width: 100%;border: solid black 1px;">描述使用者必须做的事情的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="AudioImages/AudioTaskCountdownStep.png" alt="Task Completion Screen" style="width: 100%;border: solid black 1px;">任务开始之前特定时长的倒计时</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="AudioImages/AudioTaskStep.png" alt="Task Screen" style="width: 100%;border: solid black 1px; ">在音频收集的时候显示的动画 (音频收集步骤).</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="AudioImages/AudioTaskCompletionStep.png"  alt="Task Completion Screen" style="width: 100%;border: solid black 1px;">确认完成</p>
+<p style="clear: both;"></p>
+
+<h4>步行与平衡</h4>
+
+<p>在步行与平衡任务中 (参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/shortWalkTaskWithIdentifier:intendedUseDescription:numberOfStepsPerLeg:restDuration:options:">ORKOrderedTask shortWalkTaskWithIdentifier:
+intendedUseDescription:numberOfStepsPerLeg:restDuration:options</a>),
+使用者也许是在室内走了一小段距离。你也许用这种半控制的任务去收集诸如步长，脚步平滑度，走路摇晃程度之类你的程序使用者走路时的客观数据。使用者也许仅仅是在室内走了一小段距离。你也许用这种半自动的任务来收集客观可以被用来估计步长，平滑度，摆动幅度以及使用者其他走路方面的数据。</p>
+
+<p>下面的这些屏幕截图是步行与平衡任务的例子</p>
+
+<p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep2.png" style="width: 100%;border: solid black 1px;">给任务以动机的引导以及引导使用者该怎么做</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep3.png" style="width: 100%;border: solid black 1px;">任务开始之前特定时长的倒计时</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep4.png" style="width: 100%;border: solid black 1px; ">让使用者去走路</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep5.png" style="width: 100%;border: solid black 1px;">让使用者去走路</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep6.png" style="width: 100%;border: solid black 1px;">让使用者休息</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep7.png" style="width: 100%;border: solid black 1px;">任务完成</p>
+<p style="clear: both;"></p>
+
+<h4>轻拍速度</h4>
+
+<p>在轻拍任务中 (参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/twoFingerTappingIntervalTaskWithIdentifier:intendedUseDescription:duration:options:">ORKOrderedTask twoFingerTappingIntervalTaskWith
+Identifier:intendedUseDescription:duration:options</a>)，使用者快速交替的在触摸屏上 
+轻拍两个目标。触摸结果的数据可以被用来评定基础的运动能力，诸如速度，准确性和节奏。</p>
+
+<p>触摸数据, 以及所有来自 iOS 中 CoreMotion 的加速计数据，是由公共API收集的，没有数据分析是由 ResearchKit 框架来完成的。</p>
+
+<p>以下的屏幕截图是轻拍速度任务的例子。</p>
+
+<p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Motivation for the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep2.png" style="width: 100%;border: solid black 1px;">给这个任务的引导</p><p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep3.png" style="width: 100%;border: solid black 1px; ">使用者在目标上快速的轻拍</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep4.png" style="width: 100%;border: solid black 1px;">确认完成</p>
+<p style="clear: both;"></p>
+
+<h4>空间记忆</h4>
+
+<p>在空间记忆任务中 (查看方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maxTests:maxConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:">ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:mini
+mumSpan:maximumSpan:playSpeed:maxTests:maxConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:</a>)，使用者被要求观察之后回想起一系列游戏中的持续时间段——比如说环境。任务会收集可以被用于估算视觉空间和执行功能的数据。</p>
+
+<p>持续时间段在任务进行中是自动变化的，在序列成功完成之后增长，同时在失败的时候下降，在 <code>minimumSpan</code> 和
+<code>maximumSpan</code>范围之间。<code>playSpeed</code> 的属性可以让你控制序列播放的速度，<code>customTargetImage</code> 的属性可以的特性让你可以定制横置目标的形状。游戏在 <code>maxTests</code> 测试结束或者使用者造成 <code>maxConsecutiveFailures</code> 连续错误的时候结束。</p>
+
+<p>结果收集由游戏计分，其中游戏的细节，以及触摸输入是由使用者自己决定的。</p>
+
+<p>以下的屏幕截图是一个空间记忆任务的例子</p>
+
+<p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">表明任务的意图</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">描述使用者必须去做的事情</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3.png" alt="Initial sequence playback screen" style="width: 100%;border: solid black 1px;">花依次亮起来</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3_1.png" alt="Recall sequence screen" style="width: 100%;border: solid black 1px; ">使用者必须回忆起花亮起的序列</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3_2.png" alt="Consecutive failure screen" style="width: 100%;border: solid black 1px;">如果使用者犯了一个错误，程序会提供一个新的图案</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3_3.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px;">一个较短的序列被提供给使用者</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep4.png" alt="Task Completion screen" style="width: 100%;border: solid black 1px;">任务结束</p>
+<p style="clear: both;"></p>
+
+<h4>同步系列加法测验 (PSAT)</h4>
+
+<p>在同步系列加法测验 (PSAT) 任务中 (参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:">ORKOrderedTask PSATTask
+WithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options</a>),
+一个数字每隔2-3秒在设备屏幕上出现，同时使用者必须将每个新出现的数字与之前的相加。一个同步系列加法测验任务计算可以被认为是听力和视觉信息处理速度的认知功能，灵活度，以及使用者的计算能力。</p>
+
+<p> PSAT任务的的得分是在几个可能正确的选项之间选出正确答案的和。任务所收集的数据是一种 <a href="../../Classes/ORKPSATResult.html"><code>ORKPSATResult</code></a>  对象。</p>
+
+<p>以下的屏幕截图是一个 PSAT 任务的例子。请记住技术视觉和听觉的部分在任务中是可选的。你可以选择是否拥有它们。
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">描述使用者必须去做的事情</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep3.png" alt="Countdown screen" style="width: 100%;border: solid black 1px;"> 在任务开始前倒计时特定的一段时间 </p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep4.png" alt="The user must add each new digit on the screen to the one immediately prior to it." style="width: 100%;border: solid black 1px; ">使用者必须将屏幕上出每一个新的数字与它之前出现的数字相加</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep5.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">任务结束</p>
+<p style="clear: both;"></p>
+
+<h4>反应时间</h4>
+
+<p>在反应时间任务中 (参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:">ORKOrderedTask reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumSt
+imulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:option</a>),
+使用者被要求摇晃或者移动设备以对设备屏幕上的可视化信号做出反应。这个任务被分为几次来完成（你可以自由定义次数）。为了完成任务中的一个步骤，使用者必须在规定时间内用比在 <code>thresholdAcceleration</code> 属性内预设值更大的加速度来摇晃/移动设备。这个任务在使用者成功的完成所有任务中预定的次数之后结束。使用这个任务来评估使用者的对刺激的反应同时计算他们的反应时间。</p>
+
+<p>被此任务收集的数据是 <a href="../../Classes/ORKReactionTimeResult.html"><code>ORKReactionTimeResult</code></a> 对象格式的。每一个这样的对象都包含一个代表传传送刺激以及一个 <a href="../../Classes/ORKFileResult.html"><code>ORKFileResult</code></a> 类型对象的时间戳，这种对象代表在一次完成任务中收集的运动数据。为了呈现这个任务，使用了 <a href="../../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> 对象。</p>
+
+<p>以下的屏幕截图表现了一个反应时间的例子
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">描述使用者必做事项</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep3.png" alt="Actual task screen." style="width: 100%;border: solid black 1px; ">实际任务</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep4.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">任务完成</p>
+<p style="clear: both;"></p>
+
+<h4>测音</h4>
+
+<p>在测音任务中 (参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:">ORKOrderedTask toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:</a>),
+使用者被要求听一些声音（在运行任务的时候使用连接到设备的耳机）同时当他们听到与屏幕上按键对应的按钮时，按下这些按钮。这些声音有不同的音频，在不同的声道（左声道或者右声道），同时直到使用者按下按键为止都会不断地增强其音量。测音任务是为了测量使用者不同方面的听音能力，基于他们对广范围内音频的反应。</p>
+
+<p>在此任务中收集的数据由特定声音信号振幅由特定音频与声道组成</p>
+
+<p>以下的屏幕截图表现了一个测音任务
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep1.png" style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep2.png" style="width: 100%;border: solid black 1px;">描述使用者必做事项</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep3.png" style="width: 100%;border: solid black 1px;">让使用者为此任务做好准备</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep4.png" style="width: 100%;border: solid black 1px; ">在任务开始前倒计时特定的一段时间</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep5.png" style="width: 100%;border: solid black 1px;">Actual task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep6.png" style="width: 100%;border: solid black 1px;">任务完成</p>
+<p style="clear: both;"></p>
+
+<h4>汉诺塔</h4>
+
+<p>在汉诺塔任务中 (see the method <a href="../../Classes/ORKOrderedTask.html#//api/name/towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:">ORKOrderedTask towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:</a>)，
+使用者被要求用最少的移动数来解决一个传统的汉诺塔任务。为了解决这个问题，使用者必须将整叠移动到高亮的平台上，同时要求步数最少。这个任务测量了使用者的问题解决技巧。这个任务在使用者成功的解决了汉诺塔任务或者承认他们不能解决这个问题的时候退出。</p>
+
+<p>这个任务中收集的数据的形式是 <a href="../../Classes/ORKTowerOfHanoiResult.html"><code>ORKTowerOfHanoiResult</code></a> 对象。这中对象之中包含了每次使用者的移动和表达问题是否被解决的标记。</p>
+
+<p>以下的屏幕截图是一个汉诺塔任务的例子</p>
+
+<p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">描述使用者必做事项</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep3.png" alt="Actual task screen." style="width: 100%;border: solid black 1px; ">实际任务</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep4.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">任务完成</p>
+<p style="clear: both;"></p>
+
+<h4>计时步行</h4>
+
+<p>在计时步行任务之中 (参见方法 <a href="../../Classes/ORKOrderedTask.html#//api/name/timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:options:">ORKOrderedTask timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:options:</a>)，
+使用者被要求快速而安全的走一段特定长度的路程。如果使用者在相反的方向走了相同的一段距离，这个任务会被立即重新激活。计时步行任务在使用者行走的固定距离这方面不一样与健康任务和短距离行走任务不一样。计时步行任务是用来测量使用者的下肢功能的。</p>
+
+<p>此任务收集的数据包括加速计，设备移动，计步器，以及使用者的位置。记住位置信息只有使用者同意你使用他的位置你才能获取。
+由此任务获取的数据的格式是 <a href="../../Classes/ORKTimedWalkResult.html"><code>ORKTimedWalkResult</code></a> 对象。</p>
+
+<p>以下的屏幕截图是计时步行的例子
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">给任务以动机的引导</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep2.png" alt="Gather information about the user's assistive device." style="width: 100%;border: solid black 1px;">Gathers information about the user&rsquo;s assistive device.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep3.png" alt="Instruction to perform the task" style="width: 100%;border: solid black 1px; ">对如何进行任务的指导</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep4.png" alt="Count down a specified duration to begin the task." style="width: 100%;border: solid black 1px;">在任务开始前倒计时特定的一段时间</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep5.png" alt="Actual task screen" style="width: 100%;border: solid black 1px;">实际任务屏幕</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep6.png" alt="Actual task screen" style="width: 100%;border: solid black 1px;">实际任务屏幕</p>
+<p style="clear: both;"><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep7.png" alt="Task Completion screen" style="width: 100%;border: solid black 1px;">任务结束</p>
+<p style="clear: both;"></p>
+
+<h3>收集数据</h3>
+
+<p>在活动任务中的数据收集是被记录在内存里一个层次的 <a href="../../Classes/ORKResult.html"><code>ORKResult</code></a> 对象中的。由你来决定来序列化这个层次去存储亦或是用适合你应用的方式来传送之。</p>
+
+<p>如果收集的数据太大了，以至于不能在内存中传送，层次中的<a href="../../Classes/ORKFileResult.html"><code>ORKFileResult</code></a> 对象可以替代之前的方法。文件结果是指一个在输出目录中的文件（由<a href="../../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a>的属性 <code>outputDirectory</code> 特殊化的）。举个例子，有高采样率的记录装置，比如说加速度计，可以这样直接记录到文件之中去。</p>
+
+<p>推荐的基于文件的输出方法是每次任务都创建一个新的目录，同时在你处理完这个任务的结果之后删除这个目录。</p>
+
+<p>活跃步骤支持附加记录结构，(<a href="../../Classes/ORKRecorderConfiguration.html"><code>ORKRecorderConfiguration</code></a>) 。一个记录结构定义了一种数据类型，它应当是被从传感器或者设备上的数据库的间隔时间这一步骤所收集。比如：</p>
+
+<ul>
+<li>计步器传感器返回 <code>CMPedometerData</code> 对象，它可以提供由支持设备上协处理器计算出来的步数。</li>
+<li>加速度计传感器返回 <code>CMAccelerometerData</code> 对象，它返回了横向加速度计采样出设备所受力的大小的数据。</li>
+<li>一个融合采样的加速度计，陀螺仪以及磁力计的设备运动时会返回 <code>CMDeviceMotion</code> 对象，它提供了有关设备方位和运动的信息。</li>
+<li>HealthKit 返回很多样类型，比如心率。</li>
+<li>CoreLocation 返回位置信息，融合了来自 GPS，Wi-Fi 和信号基站的信息。</li>
+</ul>
+
+
+<p> ResearchKit 中预定义的活跃任务中所采用的记录装置一直都是在向内置存储写入数据时用 <code>NSFileProtectionCompleteUnlessOpen</code>，之后在改变文件的保护层级，在数据记录结束的时候生成 <code>NSFileProtectionComplete</code> 。</p>
+
+<h2>创建新的活跃任务</h2>
+
+<p>你也可以通过你自己自定义类<a href="../../Classes/ORKActiveStep.html"><code>ORKActiveStep</code></a> 和 <a href="../../Classes/ORKActiveStepViewController.html"><code>ORKActiveStepViewController</code></a>来创建你自己新的活跃任务。在这样做的时候，你可以参考 ResearchKit 框架中已经存在的预定义任务例子中的活跃步骤去设计。</p>
+
+<p>在预定义任务中的一些步骤对创建你的任务也会非常有帮助。举个例子，<a href="../../Classes/ORKCountdownStep.html"><code>ORKCountdownStep</code></a> 表现了一个在过程中有动画表现形式的倒计时计时器。再举出另外一个例子，就是 <a href="../../Classes/ORKCompletionStep.html"><code>ORKCompletionStep</code></a> 对象表现出了一个任务结束了。</p>
+
+<p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep3.png" alt="Countdown step" style="width: 100%;border: solid black 1px; ">倒计时样例</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep4.png" alt="Completion step" style="width: 100%;border: solid black 1px;">任务结束样例</p>
+<p style="clear: both;"></p>
+
+					<footer>
+						<div class="footer-copyright">
+							
+							<p class="copyright">Copyright &copy; 2016 ResearchKit. All rights reserved. Updated: 2016-01-11</p>
+							
+							
+							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+							
+						</div>
+					</footer>
+				</main>
+			</div>
+		</div>
+	</article>
+
+	<script src="../../js/script.js"></script>
+</body>
+</html>

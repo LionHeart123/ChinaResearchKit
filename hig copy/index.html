@@ -1,0 +1,309 @@
+<html lang="en"><head>  
+  <title>iOS Human Interface Guidelines: Research Apps</title>
+  <link rel="stylesheet" type="text/css" href="style-1.5.0.css">
+  <link rel="stylesheet" type="text/css" href="../../../../Resources/1148/CSS/feedback-1.5.0.css">
+  <meta charset="utf-8"> 
+<meta id="build" name="build" content="220256f784af8a1b45d20d9b383a9d54">
+<meta id="document-version" name="document-version" content="10.0.3">
+<meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/User Experience}">
+<meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40006556">
+<meta id="chapterId" name="chapterId" content="TP40006556-CH72">
+<meta id="book-title" name="book-title" content="iOS Human Interface Guidelines">
+<meta id="book-resource-type" name="book-resource-type" content="Guide">
+<meta id="book-root" name="book-root" content="./">
+<meta id="book-json" name="book-json" content="book.json">
+<meta id="date" name="date" content="2015-10-06">
+<meta id="description" name="description" content="Provides guidelines for designing the user interface of an iOS app.">
+<meta id="IndexTitle" name="IndexTitle" content="">
+<meta id="resources-uri" name="resources-uri" content="../../../../Resources/1148">
+<link id="book-index-page" rel="Start" title="" type="text/html" href="./index.html">
+<!-- , next_chapter: next_chapter, previous_chapter: previous_chapter -->
+<link id="next-page" rel="Next" type="text/html" href="">
+<link id="previous-page" rel="Prev" type="text/html" href="">
+<meta id="devcenter" name="devcenter" content="&lt;!-- DEVCENTER_NAME --&gt;">
+<meta id="devcenter-url" name="devcenter-url" content="&lt;!-- DEVCENTER_URL --&gt;">
+<meta id="reflib" name="reflib" content="&lt;!-- REFLIB_NAME --&gt;">
+
+<meta id="xcode-display" name="xcode-display" content="render">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+</head>
+
+  <body id="conceptual_flow_with_tasks" class="jazz">
+    
+    
+
+    
+    <div class="content-wrapper">
+      
+
+      
+
+
+<article class="chapter">
+  <a name="//apple_ref/doc/uid/TP40006556-CH72"></a><a name="//apple_ref/doc/uid/TP40006556-CH72-SW1"></a>
+
+  <h2 class="chapter-name">Research Apps</h2>
+
+
+  
+  	<section class="section">
+  		<p class="para">
+  A research app lets iOS users participate in research studies from the convenience of their iOS devices. The predesigned screens and transitions available in Apple’s open source ResearchKit project make it easy to create a beautiful research app that’s customized for your study and enjoyable for people to use. To learn how to use ResearchKit to develop a research app for your study, see <a href="http://researchkit.org" onclick="s_objectID=&quot;http://researchkit.org/_1&quot;;return this.s_oc?this.s_oc(e):true">researchkit.org</a>.
+</p>
+<div class="important clear">
+  <a name="//apple_ref/doc/uid/TP40006556-CH72-DontLinkElementID_32"></a>
+  <aside class="aside">
+    <p class="aside-title">Important
+    </p>
+    <p class="para">These guidelines are for informational purposes only and do not constitute legal advice. You should contact an attorney to obtain advice with respect to the development of a research app and any applicable laws.
+    </p>
+    
+  </aside>
+</div>
+<p class="para">
+  Typically, a research app groups customized ResearchKit screens and app-specific screens into sections that fit into three primary experiences:
+</p>
+<ul class="list-bullet">
+  <li class="item"><p class="para">
+  <span class="x-name"><a href="#//apple_ref/doc/uid/TP40006556-CH72-SW2" data-renderer-version="1" data-id="//apple_ref/doc/uid/TP40006556-CH72-SW2" onclick="s_objectID=&quot;https://galleyproof.sd.apple.com/proofs/31922/documentation/UserExperience/Conceptual/MobileHIG/R_9&quot;;return this.s_oc?this.s_oc(e):true">Onboarding</a></span>
+</p>
+</li><li class="item"><p class="para">
+  <span class="x-name"><a href="#//apple_ref/doc/uid/TP40006556-CH72-SW3" data-renderer-version="1" data-id="//apple_ref/doc/uid/TP40006556-CH72-SW3" onclick="s_objectID=&quot;https://galleyproof.sd.apple.com/proofs/31922/documentation/UserExperience/Conceptual/MobileHIG/R_10&quot;;return this.s_oc?this.s_oc(e):true">Study-specific investigation</a></span>
+</p>
+</li><li class="item"><p class="para">
+  <span class="x-name"><a href="#//apple_ref/doc/uid/TP40006556-CH72-SW4" data-renderer-version="1" data-id="//apple_ref/doc/uid/TP40006556-CH72-SW4" onclick="s_objectID=&quot;https://galleyproof.sd.apple.com/proofs/31922/documentation/UserExperience/Conceptual/MobileHIG/R_11&quot;;return this.s_oc?this.s_oc(e):true">Management items</a></span>
+</p>
+</li>
+</ul>
+<p class="para">
+  Follow the guidelines for the sections that comprise each of these experiences so that you can design a research app that helps participants feel comfortable and stay engaged.
+</p>
+
+		</section> 
+
+
+  <section class="section">
+  <a name="//apple_ref/doc/uid/TP40006556-CH72-SW2"></a>
+  <h3 class="section-name" tabindex="0">Onboarding</h3>
+  <p class="para">
+  The onboarding experience consists of a series of sections that introduce the study to potential participants and allow you to get their consent. Participants don’t typically revisit the onboarding sections after completing them. The onboarding experience includes the following sections:
+</p><figure class="figure">
+  
+  <span class="caption"></span>
+  <img src="art/research_app_onboarding_2x.png" alt="image: ../art/research_app_onboarding_2x.png" width="628" height="129">
+</figure><p class="para">
+  You should present the sections in the onboarding experience in the order shown here—that is, introduction, eligibility, consent, and (if appropriate) permission to access data.
+</p><div class="two-columns">
+  <div class="left-column">
+    <p class="para">
+  <strong class="inline-head">Create an introduction that informs and provides a call to action.</strong> The introduction section should help people learn more about your study and tell them how to become a participant. It’s best when the introduction section also gives existing participants a quick way to log in and continue an in-progress study.
+</p>
+  </div>
+  <div class="right-column">
+    <img class="inline-graphic" src="art/introduction_2x.png" alt="image: ../art/introduction_2x.png" width="267" height="451">
+  </div>
+</div><div class="two-columns">
+  <div class="left-column">
+    <img class="inline-graphic" src="art/eligibility_2x.png" alt="image: ../art/eligibility_2x.png" width="267" height="451">
+  </div>
+  <div class="right-column">
+    <p class="para">
+  <strong class="inline-head">Determine eligibility as soon as possible.</strong> Present the eligibility section after the introduction and before the consent section (participants don’t need to view the consent section if they’re not eligible for the study). Be sure to present only the eligibility requirements that are necessary for your study. Use simple, straightforward language to describe the requirements and make it easy for people to enter information.
+</p>
+  </div>
+</div><p class="para">
+  <strong class="inline-head">Make sure participants understand your study before you get their consent.</strong> ResearchKit helps you make the consent process concise and friendly, while still allowing you to incorporate into the consent any legal requirements or requirements set by an institutional review board or ethics review board. (If your app involves conducting human subjects research, you must make sure that your app complies with the applicable App Store Guidelines, including the consent requirements.) Typically, the consent section:
+</p><ul class="list-bullet">
+  <li class="item"><p class="para">
+  Explains how the study works
+</p>
+</li><li class="item"><p class="para">
+  Ensures that participants understand the study and their responsibilities
+</p>
+</li><li class="item"><p class="para">
+  Gets the participant’s consent
+</p>
+</li>
+</ul><div class="two-columns">
+  <div class="left-column">
+    <p class="para">
+  <strong class="inline-head">Break a long consent document into easily digestible subsections.</strong> Each subsection can cover one aspect of the study, such as data gathering, data use, potential benefits, possible risks, time commitment, how to withdraw, and so on. For each subsection, use simple, straightforward language to provide a high-level overview. If necessary, provide a more detailed explanation of the subsection that participants can read by tapping a Learn More button. Participants should be able to view the full consent content before they agree to participate.
+</p>
+  </div>
+  <div class="right-column">
+    <img class="inline-graphic" src="art/consent_study_description_2x.png" alt="image: ../art/consent_study_description_2x.png" width="267" height="451">
+  </div>
+</div><div class="two-columns">
+  <div class="left-column">
+    <img class="inline-graphic" src="art/consent_understanding_2x.png" alt="image: ../art/consent_understanding_2x.png" width="267" height="451">
+  </div>
+  <div class="right-column">
+    <p class="para">
+  <strong class="inline-head">If it makes sense, provide a quiz that tests the participant’s understanding.</strong> You might choose to do this if you would be asking the participant to answer the same questions if you obtained the participant’s consent in person.
+</p>
+  </div>
+</div><p class="para">
+  <strong class="inline-head">Get the participant’s consent and, if appropriate, some contact information.</strong> After agreeing to join the study, participants receive a confirmation dialog, which should be followed by screens in which they provide their signature and contact details. Most research apps email participants a PDF version of the consent form for their records.
+</p><section class="rec-container">
+	<div class="blurb">
+		
+	</div>
+
+	<section class="left-container">
+			<p class="container-label participants-respond-to-an-alert-to-confirm-their-intent-to-join-a-study">Participants respond to an alert to confirm their intent to join a study</p>
+		<img class="inline-graphic" src="art/consent_alert_2x.png" alt="image: ../art/consent_alert_2x.png" width="267" height="451">
+	</section>
+		<section class="right-container">
+				<p class="container-label participants-can-provide-their-signature-in-the-consent-process">Participants can provide their signature in the consent process</p>
+			<img class="inline-graphic" src="art/consent_signature_2x.png" alt="image: ../art/consent_signature_2x.png" width="267" height="451">
+		</section>
+</section><p class="para">
+  <strong class="inline-head">Get permission if you need to access the participant’s device or data.</strong> Clearly explain why your research app needs access to location, Health app, or other data and be sure to avoid asking for access to data that isn’t critical for your study. Also ask for permission to send notifications to the participant’s device, if your app requires it.
+</p><section class="rec-container">
+	<div class="blurb">
+		
+	</div>
+
+	<section class="left-container">
+			<p class="container-label prepare-participants-to-grant-access-to-data-such-as-health-app-data">Prepare participants to grant access to data, such as Health app data</p>
+		<img class="inline-graphic" src="art/data_access_permission_2x.png" alt="image: ../art/data_access_permission_2x.png" width="267" height="451">
+	</section>
+		<section class="right-container">
+				<p class="container-label let-participants-choose-the-data-they-want-to-share-with-you">Let participants choose the data they want to share with you</p>
+			<img class="inline-graphic" src="art/health_data_request_2x.png" alt="image: ../art/health_data_request_2x.png" width="267" height="451">
+		</section>
+</section>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40006556-CH72-SW3"></a>
+  <h3 class="section-name" tabindex="0">Study-Specific Investigation</h3>
+  <p class="para">
+  To get input from participants, your study might use surveys, active tasks, or a combination of both. Depending on the architecture of your study, participants may interact with each section multiple times or only once.
+</p><p class="para">
+  <strong class="inline-head">Create surveys that keep participants focused and engaged.</strong> ResearchKit makes it easy to present survey questions that require different types of answers, such as true or false, multiple choice, dates and times, sliding scales, and open ended text entry. As you use ResearchKit screens to create a survey, follow these guidelines to provide a great user experience:
+</p><ul class="list-bullet">
+  <li class="item"><p class="para">
+  Tell participants how many questions there are and about how long it will take to complete the survey.
+</p>
+</li><li class="item"><p class="para">
+  Use one screen per question.
+</p>
+</li><li class="item"><p class="para">
+  Show participants their progress in the survey.
+</p>
+</li><li class="item"><p class="para">
+  Keep the survey as short as possible. Several short surveys tend to work better than one long survey.
+</p>
+</li><li class="item"><p class="para">
+  For questions that require some additional explanation, use the standard font for the question and a slightly smaller font for the explanatory text.
+</p>
+</li><li class="item"><p class="para">
+  Tell participants when the survey is complete.
+</p>
+</li>
+</ul><p class="para">
+  ResearchKit provides many customizable screens you can use in your surveys. Here are a few examples of survey screens.
+</p><figure class="figure">
+  
+  <span class="caption"></span>
+  <img src="art/ThreeQuestions_2x.png" alt="image: ../art/ThreeQuestions_2x.png" width="613" height="338">
+</figure><p class="para">
+  <strong class="inline-head">Make active tasks easy to understand.</strong> An active task requires participants to engage in an activity, such as speaking into the microphone, tapping their fingers on the screen, walking, or performing a memory test. Follow these guidelines to encourage participants to perform an active task and give them the best chance of success:
+</p><ul class="list-bullet">
+  <li class="item"><p class="para">
+  Describe how to perform the task using clear, simple language that everyone can understand.
+</p>
+</li><li class="item"><p class="para">
+  Mention if the task must be performed at a particular time or under specific circumstances.
+</p>
+</li><li class="item"><p class="para">
+  Make sure that participants can tell when the task is complete.
+</p>
+</li>
+</ul><p class="para">
+  Here are two examples of active tasks that ResearchKit supports.
+</p><section class="rec-container">
+	<div class="blurb">
+		
+	</div>
+
+	<section class="left-container">
+		<img class="inline-graphic" src="art/gait_task_2x.png" alt="image: ../art/gait_task_2x.png" width="267" height="451">
+	</section>
+		<section class="right-container">
+			<img class="inline-graphic" src="art/voice_task_2x.png" alt="image: ../art/voice_task_2x.png" width="267" height="451">
+		</section>
+</section>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40006556-CH72-SW4"></a>
+  <h3 class="section-name" tabindex="0">Management Items</h3>
+  <p class="para">
+  ResearchKit provides a profile screen that gives users a way to manage their personal information while they’re in your research app. In addition, it’s a good idea to create a screen that motivates users and gives them a way to track their progress in the study. For the most part, participants should be able to access both of these areas at any time.
+</p><div class="two-columns">
+  <div class="left-column">
+    <p class="para">
+  <strong class="inline-head">Use a profile to help participants manage personal data that relates to your study.</strong> A profile screen can let participants edit data that can change during the course of the study—such as weight or sleep habits—and remind them of upcoming activities. You can also use a profile to give participants an easy way to leave the study and to view the consent document and the app’s privacy policy.
+</p>
+  </div>
+  <div class="right-column">
+    <img class="inline-graphic" src="art/profile_2x.png" alt="image: ../art/profile_2x.png" width="267" height="451">
+  </div>
+</div><div class="two-columns">
+  <div class="left-column">
+    <img class="inline-graphic" src="art/dashboard_2x.png" alt="image: ../art/dashboard_2x.png" width="267" height="451">
+  </div>
+  <div class="right-column">
+    <p class="para">
+  <strong class="inline-head">Use a dashboard to motivate participants and show progress.</strong> A dashboard screen can let you “be in the room” with the participant and encourage them to continue. If appropriate for your study, you can use a dashboard to give participants a rich set of feedback, such as daily progress, weekly assessments, results from specific activities, and even results that compare the participant’s results with aggregated results from others in the study.
+</p>
+  </div>
+</div>
+  
+</section>
+
+  	
+ 	
+</article>
+
+    </div>
+    <div id="big_button"></div>
+    <footer id="footer">
+  <div class="content-wrapper">
+  	
+  </div>
+  <script src="../../../../Resources/1148/JavaScript/devpubs-1.5.0.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../../../Resources/1148/JavaScript/feedback-1.5.0.js" type="text/javascript" charset="utf-8"></script>
+  <div id="_omniture_top">
+<!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+<script type="text/javascript">
+/* RSID: */
+var s_account="appleglobal,appleusdeveloper"
+</script>
+
+<script type="text/javascript" src="https://www.apple.com/metrics/scripts/s_code_h.js"></script>
+<script type="text/javascript">
+s.pageName=AC.Tracking.pageName();
+s.channel="www.us.developer"
+
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)</script>
+<!-- End SiteCatalyst code version: H.8. -->
+</div>
+
+</footer>
+
+    
+  
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+
+
+
+
+</body></html>

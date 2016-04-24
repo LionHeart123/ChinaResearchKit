@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>获取授权 - 说明文档</title>
+
+	<link rel="stylesheet" href="../../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+
+			<h1 id="library-title">
+				<a href="https://github.com/ResearchKit/ResearchKit">ResearchKit </a>
+			</h1>
+
+			<!--<p id="developer-home">
+				<a href="../../index.html">ResearchKit</a>
+			</p>-->
+
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+				        <li>编程指南：</li>
+					<li><a href="../../docs/Overview/GuideOverview.html">概述</a></li>
+				        <li><a href="../../docs/Survey/CreatingSurveys.html">调查</a></li>
+					<li><a href="../../docs/InformedConsent/InformedConsent.html">获取授权</a></li>
+					<li><a href="../../docs/ActiveTasks/ActiveTasks.html">活动任务</a></li>
+					<li><a href="../../docs/Charts/ChartsAndGraph.html">图表</a></li>
+				        <li>API 参考：</li>
+					<li><a href="../../index.html">首页</a></li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview-contents" class="container">
+			<div id="content">
+				<main role="main">
+					<!--<h1 class="title">InformedConsent Document</h1>-->
+
+					<h1></h1>
+
+<p><sub>这些材料仅供参考，这些建议并不能保证完全符合法律法规。您应当联系一名律师，以获取关于开发研究类应用的相关建议，以及其他适用的法律法规。</sub></p>
+
+<h1>获取授权</h1>
+
+<p>通常而言，涉及人类受试者的研究报告往往需要进行某种形式的伦理审查。根据国家的不同，这项审查工作可能是由某个伦理审查委员会 (Institutional Review Board, IRB)，或者某个伦理委员会 (Ethics Committee, EC) 进行。对于某些研究而言，可能需要获取授权 (Consent) 才能够进行调查研究，这意味着研究者必须确保每个研究参与者都已经充分了解了研究的性质，并且研究者还必须要获得每个受试者所签署的授权。此外，授权也可能会成为应用审查的条件之一。</p>
+
+<p>ResearchKit™ 框架可以很容易地展示您的授权文件，并且获得受试者的签名。请注意，ResearchKit 框架中不包含数字签名的支持。如果需要使用可证实并且不可撤销的签名的话，那么您必须要在表单签名的时候，负责生成一个数字签名，或者生成一个可用来证明受试者身份的 PDF 文件。</p>
+
+<p>要使用 ResearchKit 框架来获取授权，您开始需要创建一个授权文档模型对象 (<a href="../../Classes/ORKConsentDocument.html"><code>ORKConsentDocument</code></a>) 来表示授权文档。在这个授权文档模型当中，对您授权文档的每一个章节，以及需要的签名进行编码。当您在文档模型中创建完您的授权表单结构之后，就可以通过向文档中添加一个可视化授权步骤 (<a href="../../Classes/ORKVisualConsentStep.html"><code>ORKVisualConsentStep</code></a>) ，来展示一个可视的、包含动画的序列来帮助用户理解文档信息。要展示需要审查的文档并获取签名的话，将这个文档添加到一个授权审核步骤当中 (<a href="../../Classes/ORKConsentReviewStep.html"><code>ORKConsentReviewStep</code></a>). 。要同时展示可视授权以及授权审核步骤的话，可以创建一个包含步骤的授权任务，然后使用一个 <a href="../../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> 对象将它们展示出来。</p>
+
+<p>您还可以将其他的步骤添加到您的授权序列当中。例如，授权共享步骤 (<a href="../../Classes/ORKConsentSharingStep.html"><code>ORKConsentSharingStep</code></a>) 可以用来明确获取相关的授权，以便能与其他研究者共享您的研究中所收集的那些数据，只要您获得了 IRB 或者 EC 的许可。或者，您还可以添加指令、表单或者问题步骤来询问关于理解程度的问题，以确保您的潜在受试者能够完全理解研究的性质。</p>
+
+<h2>1. 创建授权文档模型</h2>
+
+<p>要创建授权文档模型，首先要决定您想要如何展示您的授权文档。根据您想要展示给用户的信息的样式，将您的内容按照章节进行分类。当您构造完授权文档的结构之后，您就可以使用授权文档模型对象 (<a href="../../Classes/ORKConsentDocument.html"><code>ORKConsentDocument</code></a>) 来复制相同的结构。</p>
+
+<p>ResearchKit 框架提供了一些通常包含在授权文档中的预定义章节：</p>
+
+<ul>
+<li>概述 (<code>ORKConsentSectionTypeOverview</code>)</li>
+<li>数据收集 (<code>ORKConsentSectionTypeDataGathering</code>)</li>
+<li>保密 (<code>ORKConsentSectionTypePrivacy</code>)</li>
+<li>数据使用 (<code>ORKConsentSectionTypeDataUse</code>)</li>
+<li>时间承诺 (<code>ORKConsentSectionTypeTimeCommitment</code>)</li>
+<li>调查 (<code>ORKConsentSectionTypeStudySurvey</code>)</li>
+<li>任务 (<code>ORKConsentSectionTypeStudyTasks</code>)</li>
+<li>撤销授权 (<code>ORKConsentSectionTypeWithdrawing</code>)</li>
+</ul>
+
+
+<p>预定义的章节包含了相应的图像和本地化的标题。要使用预定义的章节，使用 <a href="../../Classes/ORKConsentSection.html"><code>ORKConsentSection</code></a> 对象的 <code>content</code> 或者 <code>htmlContent</code> 属性来为这个章节提供一个简短的一句话概述，并且提供当用户点击 "Learn More" 按钮时所显示的内容。
+您可以按预期的顺序使用预定义的章节，ResearchKit 框架将会为不同章节之间的过渡提供动画效果，从而给予流畅的用户体验。</p>
+
+<p>当您创建完章节之后，您就可以创建一个步骤来显示章节了。</p>
+
+<pre><code>    ORKConsentDocument *document = [ORKConsentDocument new];
+    ORKConsentSection *section1 =
+      [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
+    section1.title = @"在这里输入章节的标题...";
+    section1.summary = @"在这里输入章节的概述...";
+    section1.content = @"在 Learn More 中显示的内容...";
+
+    // 为之后的章节创建额外的章节对象
+    document.sections = @[section1, ...];
+
+    ORKVisualConsentStep *step =
+      [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsent document:document];
+
+    // 然后接下来创建并展示一个包含此步骤的任务
+</code></pre>
+
+<p>如果预定义的授权章节没有充分涵盖您授权文档所拥有的章节的话，您可以自行创建自定义章节。您也可以自行创建图像和动画，并将他们添加到您的授权章节当中，已完成整个步骤。您所添加的动画应该是 H.264 视频；为了得到最好的结果，您应当先尝试匹配包含在 ResearchKit 框架中的所有资源。</p>
+
+<h3>创建可视化授权步骤</h3>
+
+<p>可视化授权步骤展示了授权文档的所有章节。您需要负责使用相应的内容来填充可视化授权步骤；<code>ORKVisualConsentStep</code> 对象中没有包含任何的默认内容。</p>
+
+<pre><code>    // 为每一页的可视化授权添加授权章节；例如：
+    ORKConsentSection *section1 =
+      [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
+    document.sections = @[section1, ...];
+
+    // 向可视化授权步骤中添加文档以及（或者）审核步骤：
+    ORKVisualConsentStep *visualConsent =
+      [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsentIdentifier document:document];
+
+    // 创建并展示包含此步骤的任务
+</code></pre>
+
+<p>可视化步步骤示例如下：</p>
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_1.png" style="width: 100%;border: solid black 1px; ">授权概述屏幕 (ORKConsentSectionTypeOverview 对象)</p>
+
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_2.png" style="width: 100%;border: solid black 1px;">数据收集授权 (ORKConsentSectionTypeDataGathering 对象)</p>
+
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_3.png" style="width: 100%;border: solid black 1px;">保密授权 (ORKConsentSectionTypePrivacy 对象)</p>
+
+
+<p><p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_4.png" style="width: 100%;border: solid black 1px; ">公开数据使用授权 (ORKConsentSectionTypeDataUse 对象)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_5.png" style="width: 100%;border: solid black 1px;">时间承诺 (ORKConsentSectionTypeTimeCommitment 对象)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_6.png" style="width: 100%;border: solid black 1px;">调查研究类型 (ORKConsentSectionTypeStudySurvey 对象)</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_7.png" style="width: 100%;border: solid black 1px; ">调查任务 (ORKConsentSectionTypeStudyTasks 对象)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_8.png" style="width: 100%;border: solid black 1px;"> 授权撤销 (ORKConsentSectionTypeWithdrawing 对象)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_9.png" style="width: 100%;border: solid black 1px;"> 自定义授权章节 (ORKConsentSectionTypeCustom 对象)</p>
+<p style="clear: both;"></p>
+
+<h3>添加审核步骤</h3>
+
+<p>用户可以审核位于授权审核步骤 (<code>ORKConsentReviewStep</code>) 中的授权审核文档。根据您对签名的需求，您也可以要求用户输入他们的姓名，并且在屏幕上进行签名。</p>
+
+<p>授权审核的内容不仅可以由您的文档模型中通过将所有的授权章节相互串联而产生，还可以通过在授权文档的 <code>htmlReviewContent</code> 属性中提供完全独立的 HTML 审核内容。</p>
+
+<p>当用户同意授权表单中的内容后，会显示一个确认对话框。该对话框的文本可以通过使用 <code>ORKConsentReviewStep</code> 的 <code>reasonForConsent</code> 属性完成自定义。</p>
+
+<p>如果步骤的 <code>signature</code> 属性包含了一个 <code>requiresName</code> 值为 YES(true) 的签名对象的话，那么授权审核步骤中将会包含名字输入页面。类似地，如果步骤的 <code>signature</code> 属性包含了一个 <code>requiresSignature</code> 属性为 YES (true) 的签名对象的话，那么授权审核步骤中将会包含签名输入页面。</p>
+
+<pre><code>    ORKConsentDocument *consent = [[ORKConsentDocument alloc] init];
+    consent.title = @"授权示例";
+    consent.signaturePageTitle = @"授权";
+
+    ORKConsentReviewStep *reviewStep =
+      [[ORKConsentReviewStep alloc] initWithIdentifier:kConsentReviewIdentifier
+                                             signature:consent.signatures[0]
+                                            inDocument:consent];
+    reviewStep.text = @"Lorem ipsum ..";
+    reviewStep.reasonForConsent = @"Lorem ipsum ...";
+
+    // 向任务中添加内容并将其展示
+</code></pre>
+
+<p>审核步骤的示例界面如下所示：</p>
+
+<p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_10.png" style="width: 100%;border: solid black 1px; ">授权审核 (<a href="../../Classes/ORKConsentReviewStep.html">ORKConsentReviewStep</a> 对象)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_11.png" style="width: 100%;border: solid black 1px;">同意授权文档 (<a href="../../Classes/ORKConsentReviewStep.html">ORKConsentReviewStep</a> 对象的 reasonForConsent 属性)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_12.png" style="width: 100%;border: solid black 1px;"> 授权审核名字输入 (<a href="../../Classes/ORKConsentReviewStep.html">ORKConsentReviewStep</a> 中的 signature 属性)</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_13.png" style="width: 100%;border: solid black 1px; ">授权审核签名 (<a href="../../Classes/ORKConsentReviewStep.html">ORKConsentReviewStep</a> 中的 signature 属性)</p>
+<p style="clear: both;"></p>
+
+<h3>授权共享步骤</h3>
+
+<p>应用程序使用 ResearchKit 框架的主要目的在于，它们需要收集用于某项具体研究的相关数据。但是如果您想要让受试者同意您与其他的研究人员共享研究数据的话，那么受试者必须要能够控制这一个权限。</p>
+
+<p>授权共享步骤 (<code>ORKConsentSharingStep</code>) 可以被用来明确地获取相关许可，允许您将您在研究中收集的用户数据与其他研究人员进行共享，只要您的 IRB 或者 EC 准许的话（如果可用的话）。要使用授权共享步骤，您可以将其添加到任务当中，或许您可以在授权审核步骤之前添加它。</p>
+
+<pre><code>    ORKConsentSharingStep *sharingStep =
+      [[ORKConsentSharingStep alloc] initWithIdentifier:kConsentSharingIdentifier
+                           investigatorShortDescription:@"机构名称"
+                            investigatorLongDescription:@"机构名称及合作机构"
+                          localizedLearnMoreHTMLContent:@"Lorem ipsum..."];
+
+    // 然后向任务中添加此步骤，然后在任务视图控制器中将其展示
+</code></pre>
+
+<p>授权共享步骤如下所示：
+<center>
+<figure>
+<img src="VisualStep_Images/SharingConsentStep.png" width="25%" alt="Instruction step"  style="border: solid black 1px;"  align="middle"/>
+  <figcaption> <center>授权共享步骤的示例</center></figcaption>
+</figure>
+</center></p>
+
+<h2>2. 创建授权任务</h2>
+
+<p>当您创建完步骤之后，创建一个 <a href="../../Classes/ORKOrderedTask.html"><code>ORKOrderedTask</code></a> 任务，然后将这些步骤添加到此任务当中。要展示任务的话，请将您的任务挂接到一个任务视图控制器上，然后展示该控制器。</p>
+
+<p>下面的代码片段展示了如何创建一个带有可视化授权步骤和授权审核步骤的任务：</p>
+
+<pre><code>    ORKVisualConsentStep *visualStep =
+      [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsentIdentifier
+                                              document:consent];
+    ORKConsentReviewStep *reviewStep =
+      [[ORKConsentReviewStep alloc] initWithIdentifier:kConsentReviewIdentifier
+                                             signature:consent.signatures[0]
+                                            inDocument:consent];
+    // 配置这些步骤
+
+    // 创建一个包含这些步骤的任务
+    ORKOrderedTask *task =
+      [[ORKOrderedTask alloc] initWithIdentifier:kConsentTaskIdentifier
+                                           steps:@[visualStep,reviewStep]];
+
+    ORKTaskViewController *taskViewController =
+      [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+
+    // 然后展示任务视图控制器
+</code></pre>
+
+<h2>3. 生成 PDF 文件（可选）</h2>
+
+<p>ResearchKit 框架可以帮助您生成一个经过签名的授权书 PDF 文件，并提供给用户。例如，您的应用程序可以在本地生成一个 PDF 文件，然后将其写入到硬盘上面，或者将其通过邮件发送给受试者，也可以将其发送给服务器。</p>
+
+<p>要做到这一点，首先需要从已完成的授权审核中获取任意一种签名，然后将这个生成的签名应用到您授权文档的拷贝当中。接下来，调用 <a href="../../Classes/ORKConsentDocument.html"><code>ORKConsentDocument</code></a> 的 <code>makePDFWithCompletionHandler:</code> 方法，如下所示：</p>
+
+<pre><code>    ORKConsentDocument *documentCopy = [document copy];
+
+    ORKConsentSignatureResult *signatureResult =
+      (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:kConsentReviewIdentifier] firstResult];
+    [signatureResult applyToDocument:documentCopy];
+
+    [documentCopy makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
+        // 将 PDF 数据写入到硬盘当中，或者通过邮件发送出去，也可以将其发送到服务器当中
+    }];
+</code></pre>
+
+<p>您只能将一个签名结果应用到授权文档的拷贝当中。</p>
+
+					<footer>
+						<div class="footer-copyright">
+
+							<p class="copyright">Copyright &copy; 2016 ResearchKit. All rights reserved. Updated: 2016-01-11</p>
+
+
+							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+
+						</div>
+					</footer>
+				</main>
+			</div>
+		</div>
+	</article>
+
+	<script src="../../js/script.js"></script>
+</body>
+</html>

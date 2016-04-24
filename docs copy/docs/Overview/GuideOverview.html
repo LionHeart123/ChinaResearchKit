@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>指南概述 - 说明文档</title>
+
+	<link rel="stylesheet" href="../../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="https://github.com/ResearchKit/ResearchKit">ResearchKit </a>
+			</h1>
+
+			<!--<p id="developer-home">
+				<a href="../../index.html">ResearchKit</a>
+			</p>-->
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+				        <li>编程指南：</li>
+					<li><a href="../../docs/Overview/GuideOverview.html">概述</a></li>
+				        <li><a href="../../docs/Survey/CreatingSurveys.html">调查</a></li>
+					<li><a href="../../docs/InformedConsent/InformedConsent.html">获取授权</a></li>
+					<li><a href="../../docs/ActiveTasks/ActiveTasks.html">活动任务</a></li>
+					<li><a href="../../docs/Charts/ChartsAndGraph.html">图表</a></li>
+				        <li>API 参考：</li>
+					<li><a href="../../index.html">首页</a></li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview-contents" class="container">
+			<div id="content">
+				<main role="main">
+					<!--<h1 class="title">GuideOverview Document</h1>-->
+
+<p><sub>这些材料仅供参考，这些建议并不能保证完全符合法律法规。您应当联系一名律师，以获取关于开发研究类应用的相关建议，以及其他适用的法律法规。</sub></p>
+
+<h1>ResearchKit 框架编程指导</h1>
+
+<p>ResearchKit™ 框架是一个开源的软件框架，这个框架是为了让开发者和研究人员来更简单的创建研究型软件。这个新的框架利用了 iPhone 的传感器和能力来记录运动轨迹，采取措施以及记录数据。使用者可以实现在任何地方实现自己的想法和收集数据。
+</p>
+
+<h2>模块</h2>
+
+<p>ResearchKit 框架提供了可以被调整的模块，这些模块中有一些最基本的研究必要元素：调研，许可和活动任务。你可以原封不动的去使用这些模块，在这基础上做开发，甚至可以完全创建属于你自己的新模块。</p>
+
+<h3>调研</h3>
+
+<p>通过科学且明确的设置问题和答案，在用户使用界面预定义好的调研模块可以让你快速的建立起一次调研。调研模型是已经确定化了的，所以你所需要做的一切事情只是明确你的问题。想知道更多与调研相关的知识，请参见<a href="../../docs/Survey/CreatingSurveys.html">创建调查</a>.</p>
+
+<h3>授权</h3>
+
+<p>研究中的参与者常常不得不被要求说出一些与他们所参与的研究相关的敏感信息。所以完全明确什么使用者信息要被收集以及谁会接触到他们的信息是至关重要的。 ResearchKit 框架提供了模板，你可以参考这个模板去修改你自己的，以此来解释你研究的细节同时获取研究参与者的授权。想知道更多有关授权的知识，请参阅 <a href="../../docs/InformedConsent/InformedConsent.html">创建授权文档</a>.</p>
+
+
+<h3>活动任务</h3>
+
+<p>一些研究也许会需要有调查问题所提供的数据或者 iOS 中的 HealthKit 和 CoreMotion 这样的 API 收集的数据。活动任务邀请使用者在部分受控的情况下来使用 iPhone 上的传感器来动态的收集数据。想了解更多的与活动任务相关的知识，请参阅 <a href="../../docs/ActiveTasks/ActiveTasks.html">活动任务</a>.</p>
+
+<h2>任务与步骤</h2>
+
+<p>ResearchKit 框架中的任务可以是一系列被安排好的行动序列，也可以是是动态的，也就是之前的结果会影响现在显示的步骤。视图控制器支持在一个很长的任务中保存每一步的结果，同时支持稍后重新储存数据，与 UI 显示状态一并重新存储。这是为了防止使用者在用任务进行中退出了你的应用。 </p>
+
+<p>无论你的应用是否给出指导，展示调查表，包含授权，亦或运行活动任务，ResearchKit 中所有东西都是一系列步骤的集合 (<a href="../../Classes/ORKStep.html"><code>ORKStep</code></a> 对象)，这是从任务中汇聚而来的(一个 <a href="../../Protocols/ORKTask.html"><code>ORKTask</code></a> 对象)。 为了展示任务，需要将任务依附到任务视图控制器对象上 (<a href="../../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a>)。当使用者完成了任务中规定的步骤的时候，任务的视图控制器会生成一个记录了步骤开始和结束时间的以及步骤中所有结果的步骤结果对象 (<a href="../../Classes/ORKStepResult.html"><code>ORKStepResult</code></a>)。</p>
+
+<center><img src="overview.png" width="80%" alt="ResearchKit framework Overview"/></center>
+
+
+<p>在一个简单的应用中，你可有创建你的直接用代码创建你的任务，收集结果同时将之序列化之后存入硬盘以便之后人工的去收集，分析。一次大规模的部署也行会动态的从服务器上下载预定义的调查，同时将其解序列化来生成 ResearchKit 对象层级。与之前一样，任务结果可以被序列化同时上传到服务器以便之后的分析。</p>
+
+<h2>目前的限制</h2>
+
+<p>ResearchKit 框架的特性表将始终不断的增长，如同开源社区贡献的很有用的模块一样。记住 ResearchKit 框架目前没有包含这些功能：</p>
+
+<ul>
+<li>背景传感器数据收集。诸如iOS 中的 HealthKit 和 CoreMotion 这样的 API 们已经可以实现这样的功能了。</li>
+<li>你的应用和服务器之间安全的通信机制，你需要自己去提供这个。</li>
+<li>为你的参与者规划调查和活动任务。</li>
+<li>可以被 ResearchKit 框架使用来构建数据的数据的定义好的数据格式必须是序列化的。所有 ResearchKit 框架对象都遵从 <code>NSSecureCoding</code> 协议，示范代码的结果在离开框架之后将被序列化成 JSON 。</li>
+</ul>
+
+<p>你对你应用内所有适用于法律的内容都有法律责任。</p>
+
+<h2>日志记录上的错误和警告</h2>
+
+<p>ResearchKit 框架支持4种日志级别，由四种预处理宏指令以及他们对应的 <em><code>NSLog()</code>-like</em> 日志宏指令：
+<ul>
+<li>  <code>ORK_LOG_LEVEL_NONE</code> </li>
+<li>  <code>ORK_LOG_LEVEL_DEBUG</code>, <code>ORK_Log_Debug()</code> </li>
+<li>  <code>ORK_LOG_LEVEL_WARNING</code>, <code>ORK_Log_Warning()</code> </li>
+<li>  <code>ORK_LOG_LEVEL_ERROR</code>, <code>ORK_Log_Error()</code></p> </li> 
+<!--这里我觉得官网写错了，应该是我这样的，写这个部分的弱鸡以为他的写Markdown么，坚持不认为应该是 * -->
+</ul>
+<!--
+不应该是这样
+* ORK_LOG_LEVEL_NONE 
+* ORK_LOG_LEVEL_DEBUG, ORK_Log_Debug() 
+* ORK_LOG_LEVEL_WARNING, ORK_Log_Warning() 
+* ORK_LOG_LEVEL_ERROR, ORK_Log_Error(
+-->
+<p>设置 ResearchKit 框架的 <code>ORK_LOG_LEVEL_NONE</code> 宏指令为 <code>1</code> 会完全让所有 ResearchKit的日志沉默，优先于其他任何特定的日志级别。设置 <code>ORK_LOG_LEVEL_DEBUG</code>， <code>ORK_LOG_LEVEL_WARNING</code>， 或者 <code>ORK_LOG_LEVEL_ERROR</code> 为 <code>1</code> 则会在那个等级或者更高的等级开启日志。</p>
+
+<p>如果你不明确的设置日志等级， <code>ORK_LOG_LEVEL_WARNING=1</code> 被当做默认值使用。</p>
+
+<p>你必须在你的 ResearchKit 子项目中设置你预处理宏指令，而不是在你的主任务中。在 <em>Xcode</em> 中，你可以通过这样做 you can do so by setting any of them in the <code>Preprocessor Macros</code> list on the <code>Build Settings</code> of your <code>ResearchKit</code> framework target.</p>
+
+<p>如果你在通过 Cocoapods 使用 ResearchKit 同时你需要去修改日志级别请参阅如下资源： <a href="http://stackoverflow.com/a/30038120/269753">[1]</a> <a href="http://www.mokacoding.com/blog/cocoapods-and-custom-build-configurations/">[2]</a>.</p>
+
+					<footer>
+						<div class="footer-copyright">
+							
+							<p class="copyright">Copyright &copy; 2016 ResearchKit. All rights reserved. Updated: 2016-01-11</p>
+							
+							
+							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+							
+						</div>
+					</footer>
+				</main>
+			</div>
+		</div>
+	</article>
+
+	<script src="../../js/script.js"></script>
+</body>
+</html>
